@@ -1,66 +1,25 @@
-## Foundry
+## Merkle Proofing 
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**Merkle Tree is cryptographic data - structure that have hashes in the nodes of the tree**
 
-Foundry consists of:
+Each node of the tree is a hash, the parents are the hashing of the children nodes !!! 
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## What is Merkle Proof ?
 
-## Documentation
+It is a way of proving that a certain data is inside a certain data group using the hashing mechanism. 
 
-https://book.getfoundry.sh/
+Here if we needed to prove that the hash1 was a part of the tree all we need to do is have the rest of the leave node hashes 2, 3, 4,.
 
-## Usage
+Assume that the hash1 was in the tree, Now recursively hash the child to get the parent till we reach the root hash.
 
-### Build
+Root hash then can be compared with the expected root hash. If they are equal then our assumption that the hash1 is in the tree
 
-```shell
-$ forge build
-```
+How is it safe, security?
 
-### Test
+Since hashes are such that they are unique for all the nodes in the tree therefore it provides us with the proof
 
-```shell
-$ forge test
-```
 
-### Format
+## Major Use Cases:
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+-   Proving smart contract state changes  such as in rollups.
+-   Air-drops nodes in the merkle tree represent the wallet addresses that are supposed to get the airdrop
